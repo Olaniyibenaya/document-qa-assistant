@@ -1,0 +1,15 @@
+# Never upload API keys
+.env
+
+# Never upload virtual environment
+venv/
+
+# Never upload vector database
+chroma_db/
+
+# Mac system files
+.DS_Store
+
+# Python cache files
+__pycache__/
+*.pyc
