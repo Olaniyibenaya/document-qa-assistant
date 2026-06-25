@@ -6,24 +6,16 @@ from groq import Groq
 
 load_dotenv()
 
-# Connect to Groq - free and fast
+# Connect to Groq api and I took put in my groq api key
 client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
-# ─────────────────────────────────────────────
-# STATE
-# Shared memory that flows through every step
-# of our LangGraph pipeline
-# ─────────────────────────────────────────────
 class AgentState(TypedDict):
     question: str        # User's question
     context: str         # Relevant chunks from document
     answer: str          # Final generated answer
     chat_history: List   # Previous conversation messages
 
-# ─────────────────────────────────────────────
-# STEP 1 — RETRIEVE
-# Search vector store for relevant document chunks
-# ─────────────────────────────────────────────
+#here we are trying to search the vector store for relevant document chunks
 def retrieve_context(state: AgentState, vector_store):
     """
     Searches the vector store for chunks
@@ -31,18 +23,15 @@ def retrieve_context(state: AgentState, vector_store):
     """
     question = state["question"]
 
-    # Get top 3 most relevant chunks
-    results = vector_store.similarity_search(question, k=3)
+    # We look for 4 of the most relevant chunks 
+    results = vector_store.similarity_search(question, k=4)
 
-    # Combine chunks into one context block
+    # this is where we combine those chunks that are found
     context = "\n\n".join([doc.page_content for doc in results])
 
     return {**state, "context": context}
 
-# ─────────────────────────────────────────────
-# STEP 2 — GENERATE
-# Send question + context to Groq to generate answer
-# ─────────────────────────────────────────────
+# here we are making sure to sent question plus the context made above
 def generate_answer(state: AgentState):
     """
     Uses retrieved context and question
@@ -58,9 +47,9 @@ def generate_answer(state: AgentState):
         for msg in chat_history:
             history_text += f"User: {msg['question']}\nAssistant: {msg['answer']}\n\n"
 
-    # Send to Groq
+    # Send to groq and we are using the model llama-3.3-70b-versatile which was free for me to use
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",  # Free model on Groq
+        model="llama-3.3-70b-versatile", 
         messages=[
             {
                 "role": "system",
