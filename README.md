@@ -1,7 +1,5 @@
 # Document Q&A Assistant
 
-# Document Q&A Assistant
-
 This project explores how large language models can answer questions using information retrieved from uploaded documents.
 
 It uses retrieval-augmented generation (RAG) to find relevant document content and provide context to an LLM before generating a response.
