@@ -1,6 +1,12 @@
 # Document Q&A Assistant
 
-A conversational AI assistant that answers questions about uploaded documents using RAG (Retrieval Augmented Generation), LangChain, LangGraph, and FastAPI.
+# Document Q&A Assistant
+
+This project explores how large language models can answer questions using information retrieved from uploaded documents.
+
+It uses retrieval-augmented generation (RAG) to find relevant document content and provide context to an LLM before generating a response.
+
+The application combines a FastAPI backend, a Streamlit interface, and vector-based document retrieval.
 
 ## What This Project Does
 
