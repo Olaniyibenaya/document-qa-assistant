@@ -1,7 +1,9 @@
 # Document Q&A Assistant
+
+
 ## Application Demo
 
-![Screenshot 2026-11-06 at 08.51.31](Screenshot 2026-11-06 at 08.51.31.png)
+![Document Q&A Assistant Demo](Screenshot%202026-11-06%20at%2008.51.31.png)
 
 This project explores how large language models can answer questions using information retrieved from uploaded documents.
 
