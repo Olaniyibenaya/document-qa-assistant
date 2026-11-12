@@ -27,6 +27,20 @@ The application combines a FastAPI backend, a Streamlit interface, and vector-ba
 - **FastAPI** - REST API endpoints
 - **Sentence Transformers** - Text embeddings
 
+## System Architecture
+
+```mermaid
+flowchart TD
+    A[User uploads document] --> B[Document processing]
+    B --> C[Text chunking]
+    C --> D[Embedding generation]
+    D --> E[(ChromaDB vector store)]
+    F[User asks a question] --> G[Relevant chunk retrieval]
+    E --> G
+    G --> H[LLM generates an answer]
+    H --> I[Answer shown in Streamlit]
+```
+
 ## How It Works
 User uploads document
 
